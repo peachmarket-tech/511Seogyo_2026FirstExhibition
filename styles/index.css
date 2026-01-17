@@ -1,0 +1,825 @@
+/* Global Vars */
+:root {
+    --black: #1D1D1D;
+    --white: #FFFFFF;
+    --lime: #DFFF5E;
+    --blue: #2F62FF;
+    --orange: #FF5C28;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #111;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* Mobile Container */
+.app-container {
+    width: 100%;
+    max-width: 430px;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--black);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Language Switcher --- */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: inherit;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0.4;
+    color: inherit;
+    font-family: inherit;
+}
+
+.lang-btn.active {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.divider {
+    margin: 0 2px;
+    opacity: 0.4;
+}
+
+/* --- Landing Page Styles --- */
+.landing-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.landing-container.hidden {
+    transform: translateY(-100%);
+}
+
+/* Corner Meta Data */
+.corner-text {
+    position: absolute;
+    top: 24px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--black);
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.top-left {
+    left: 24px;
+    text-align: left;
+}
+
+.top-right {
+    right: 24px;
+    text-align: right;
+    top: 60px;
+}
+
+/* Main Visual */
+.landing-main {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+/* Background Graphic */
+.graphic-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.starburst {
+    width: 100%;
+    height: 100%;
+    animation: spin 30s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Typography */
+.typography-layer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.huge-text {
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--black);
+    white-space: nowrap;
+    margin-left: -2px;
+}
+
+/* Language Specific Sizing */
+.huge-text.ko {
+    font-size: min(24vw, 105px);
+    line-height: 0.82;
+}
+
+.huge-text.en {
+    font-size: min(19.5vw, 90px);
+    /* Increased to fill screen */
+    line-height: 0.82;
+}
+
+/* Accent Sticker */
+.accent-sticker {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    width: 90px;
+    height: 90px;
+    background-color: var(--lime);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--black);
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.1;
+    transform: rotate(0deg);
+}
+
+.accent-sticker span:nth-child(1) {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.accent-sticker span:nth-child(2) {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.accent-sticker span:nth-child(3) {
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+/* Footer */
+.landing-footer {
+    width: 100%;
+    background-color: var(--black);
+}
+
+.enter-btn {
+    width: 100%;
+    background-color: transparent;
+    color: var(--white);
+    border: none;
+    padding: 30px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+}
+
+.enter-btn .arrow {
+    font-size: 20px;
+}
+
+.enter-btn:active {
+    background-color: #333;
+}
+
+/* --- Slider Styles --- */
+
+.slider-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Changed from flex for scrolling */
+    position: relative;
+    padding: 24px;
+    overflow-y: auto;
+    /* Enable vertical scroll */
+    padding-bottom: 120px;
+    /* Space for nav */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Top Bar */
+.top-bar {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    /* Move left to avoid collision with Lang Switcher if needed, or keep right */
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 1;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+/* Content Layout - Strict Grid */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 60px;
+    /* Fixed margin top since display is block now */
+    min-height: 50%;
+    /* Ensure decent height on load */
+}
+
+.visual-container {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.geo-icon {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.title {
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    word-break: keep-all;
+    letter-spacing: -1px;
+    text-align: left;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    border-left: 3px solid currentColor;
+    padding-left: 12px;
+}
+
+.subtitle::before {
+    display: none;
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    opacity: 0.9;
+    max-width: 100%;
+    word-break: keep-all;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+/* --- Docent Guide Styles --- */
+.docent-container {
+    width: 100%;
+    margin-bottom: 40px;
+    border-top: 1px dotted currentColor;
+    border-bottom: 1px dotted currentColor;
+    padding: 10px 0;
+}
+
+.docent-toggle-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.docent-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.docent-content {
+    padding-top: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.docent-title {
+    font-size: 14px;
+    font-weight: 900;
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+.docent-body {
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.docent-p {
+    margin-bottom: 12px;
+}
+
+.docent-p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Story List Styles (Section 1) --- */
+.story-list-container {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.scroll-hint {
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid currentColor;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.extra-stories-toggle {
+    margin: 30px 0;
+    text-align: center;
+    border-top: 1px dotted rgba(255, 255, 255, 0.2);
+    padding-top: 30px;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 20px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    font-family: inherit;
+}
+
+.toggle-btn:hover {
+    opacity: 1;
+}
+
+.extra-stories-list {
+    animation: fadeIn 0.5s ease;
+}
+
+.story-card {
+    border: 2px solid var(--orange);
+    padding: 24px;
+    margin-bottom: 24px;
+    background: rgba(255, 92, 40, 0.05);
+    /* Slight tint */
+}
+
+.story-card.extra {
+    opacity: 0.9;
+    border-style: dashed;
+}
+
+.story-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 12px;
+}
+
+.story-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.story-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.story-dialogue {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: inherit;
+}
+
+.dialogue-line {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.speaker-icon {
+    font-weight: 700;
+    color: var(--orange);
+    width: 30px;
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.dialogue-text {
+    font-weight: 500;
+}
+
+.story-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px dotted rgba(255, 255, 255, 0.2);
+}
+
+.option-text-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.opt-label {
+    font-weight: 700;
+    color: var(--orange);
+    flex-shrink: 0;
+}
+
+/* --- Physical Action Guide --- */
+.physical-action-guide {
+    margin-top: 40px;
+    padding: 30px 24px;
+    background-color: var(--orange);
+    color: var(--black);
+    border: 2px solid var(--orange);
+    text-align: center;
+}
+
+.guide-icon {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.physical-action-guide p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin: 0;
+    word-break: keep-all;
+}
+
+/* --- Section 2 Specific Styles --- */
+.guide-card {
+    border: 2px solid var(--black);
+    padding: 24px;
+    margin-bottom: 24px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.guide-title {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.guide-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    word-break: keep-all;
+}
+
+.guide-visual-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    border: 1px dashed var(--black);
+    opacity: 0.6;
+}
+
+.card-icon {
+    width: 40px;
+    height: 60px;
+    border: 2px solid var(--black);
+}
+
+.arrow-icon {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.viewing-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.point-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.point-num {
+    font-size: 12px;
+    font-weight: 900;
+    background: var(--black);
+    color: var(--lime);
+    padding: 2px 6px;
+    margin-top: 2px;
+}
+
+.point-text {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.next-step-guide {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 700;
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 1.6;
+    border-top: 1px solid var(--black);
+    padding-top: 24px;
+}
+
+/* --- Section 4 Specific Styles (Garden of Thought) --- */
+.garden-container {
+    margin-top: 40px;
+    border-top: 2px solid var(--black);
+    padding-top: 30px;
+    width: 100%;
+}
+
+.balance-card {
+    border: 2px solid var(--black);
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 12px;
+}
+
+.balance-title {
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.balance-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--black);
+}
+
+.balance-icon.circle {
+    border-radius: 50%;
+}
+
+.balance-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.balance-item {
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.balance-label {
+    font-weight: 700;
+    min-width: 50px;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-top: 2px;
+    opacity: 0.6;
+}
+
+.balance-context {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.reflection-prompt {
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--black);
+    color: var(--white);
+}
+
+.reflection-q {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.reflection-sub {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Action Area */
+.action-area {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 0;
+    font-family: inherit;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.action-btn:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation Controls - Bottom Fixed Bar */
+.nav-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    /* gradient to ensure readability if content is behind */
+    pointer-events: none;
+    /* Let clicks pass through empty areas */
+}
+
+.nav-btn {
+    pointer-events: auto;
+    flex: 1;
+    height: 100%;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: inherit;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    /* contrast against content */
+}
+
+.nav-btn:first-child {
+    justify-content: flex-start;
+    padding-left: 24px;
+}
+
+.nav-btn:last-child {
+    justify-content: flex-end;
+    padding-right: 24px;
+}
+
+.nav-btn:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
