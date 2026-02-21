@@ -59,7 +59,7 @@ export const CameraOverlay = ({ onClose }: { onClose: () => void }) => {
                 onClick={onClose}
                 style={{
                     position: 'absolute',
-                    bottom: '50px',
+                    bottom: 'calc(50px + env(safe-area-inset-bottom, 0px))',
                     left: '50%',
                     transform: 'translateX(-50%)',
                     padding: '15px 30px',
@@ -99,7 +99,7 @@ export const CameraOverlay = ({ onClose }: { onClose: () => void }) => {
             }} />
             <div style={{
                 position: 'absolute',
-                bottom: '120px',
+                bottom: 'calc(120px + env(safe-area-inset-bottom, 0px))',
                 left: '20px',
                 width: '40px',
                 height: '40px',
@@ -109,7 +109,7 @@ export const CameraOverlay = ({ onClose }: { onClose: () => void }) => {
             }} />
             <div style={{
                 position: 'absolute',
-                bottom: '120px',
+                bottom: 'calc(120px + env(safe-area-inset-bottom, 0px))',
                 right: '20px',
                 width: '40px',
                 height: '40px',
