@@ -229,8 +229,8 @@ export const App = () => {
                                             } else {
                                                 // Handle other actions if needed
                                                 if (section.action.includes('메일')) {
-                                                    // Placeholder for email action
-                                                    window.open('mailto:');
+                                                    // Open Ripples World site
+                                                    window.open('https://ripples.world/', '_blank');
                                                 }
                                             }
                                         }}
